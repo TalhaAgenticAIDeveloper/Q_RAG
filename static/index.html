@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🤖 RAG Chatbot</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1>📂 RAG Chatbot</h1>
+            </div>
+
+            <div class="upload-section">
+                <h3>📁 Upload Files</h3>
+                
+                <div class="file-input-group">
+                    <label for="pdf-input">📄 PDF Files</label>
+                    <input type="file" id="pdf-input" multiple accept=".pdf">
+                </div>
+
+                <div class="file-input-group">
+                    <label for="csv-input">📊 CSV Files</label>
+                    <input type="file" id="csv-input" multiple accept=".csv">
+                </div>
+
+                <div class="file-input-group">
+                    <label for="excel-input">📈 Excel Files</label>
+                    <input type="file" id="excel-input" multiple accept=".xlsx">
+                </div>
+
+                <button id="process-btn" class="btn btn-primary">⚡ Process Files</button>
+                <div id="upload-status" class="status-message"></div>
+            </div>
+
+            <hr class="sidebar-divider">
+
+            <div class="info-section">
+                <h4>ℹ️ Info</h4>
+                <ul class="info-list">
+                    <li>Upload PDF, CSV, or Excel files</li>
+                    <li>Ask questions about your documents</li>
+                    <li>Get instant answers powered by AI</li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Main Chat Area -->
+        <main class="main-content">
+            <div class="chat-container">
+                <!-- Chat Messages -->
+                <div class="chat-messages" id="chat-messages">
+                    <div class="welcome-message">
+                        <h2>👋 Welcome to RAG Chatbot</h2>
+                        <p>Upload your documents in the sidebar and start asking questions!</p>
+                    </div>
+                </div>
+
+                <!-- Input Area -->
+                <div class="input-area">
+                    <form id="chat-form" class="chat-input-group">
+                        <input 
+                            type="text" 
+                            id="question-input" 
+                            placeholder="Ask something from your documents..."
+                            autocomplete="off"
+                        >
+                        <button type="submit" class="btn btn-send">🔍 Ask</button>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
