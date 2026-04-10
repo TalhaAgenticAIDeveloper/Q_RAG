@@ -5,6 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 import os
 import json
 import logging
+import asyncio
 import pandas as pd
 from PyPDF2 import PdfReader
 from RAG_utils import (
@@ -149,12 +150,19 @@ async def chat(data: dict):
         raise HTTPException(status_code=400, detail="Question cannot be empty")
 
     async def generate_response():
-        """Generator for streaming response"""
+        """Generator for streaming response with delays"""
         try:
             for chunk in user_input_stream(user_question):
                 # chunk is already a string from .content
                 if chunk:
-                    yield f"data: {json.dumps({'text': chunk})}\n\n"
+                    # Split chunk into smaller pieces (words) for better streaming effect
+                    words = chunk.split()
+                    for word in words:
+                        # Add word with space
+                        text_piece = word + " "
+                        # Add 0.02 second delay between words to make streaming visible
+                        await asyncio.sleep(0.02)
+                        yield f"data: {json.dumps({'text': text_piece})}\n\n"
         except Exception as e:
             logger.error(f"Stream error: {str(e)}")
             yield f"data: {json.dumps({'error': str(e)})}\n\n"
